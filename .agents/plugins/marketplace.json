@@ -1,0 +1,20 @@
+{
+  "name": "ccspt-tools",
+  "interface": {
+    "displayName": "CCSpt Tools"
+  },
+  "plugins": [
+    {
+      "name": "ccspt-code-review-skill",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ccspt-code-review-skill"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}
