@@ -2,9 +2,9 @@
 
 A cross-harness, versioned code-review workflow for Codex, Claude Code, and DeepSeek Harness.
 
-Current version: **0.1.0**
+Current version: **0.1.1**
 
-## What this first version proves
+## What this version proves
 
 - One canonical `SKILL.md` is shared by multiple agent harnesses.
 - Every report records the skill version and update status.
@@ -21,7 +21,11 @@ Current version: **0.1.0**
 ## First test
 
 Ask the agent to use **ccspt-code-review** to review `tests/demo-case/demo.c`.
-The result should identify `CR-DEMO-001` and show skill version `0.1.0`.
+The result should identify `CR-DEMO-001` and show the installed skill version.
+
+## Update test
+
+An installation that still has version `0.1.0` should discover version `0.1.1` on GitHub and report that an update is available. It must not install the update automatically during a review.
 
 ## Private-repository update checks
 
