@@ -1,0 +1,33 @@
+{
+  "name": "ccspt-code-review-skill",
+  "version": "0.1.0",
+  "description": "Run the CCSpt evidence-based code review workflow and produce a standardized report.",
+  "author": {
+    "name": "CCSpt",
+    "url": "https://github.com/chenchenz1235"
+  },
+  "homepage": "https://github.com/chenchenz1235/ccspt-code-review-skill",
+  "repository": "https://github.com/chenchenz1235/ccspt-code-review-skill",
+  "license": "UNLICENSED",
+  "keywords": [
+    "code-review",
+    "agent-skills",
+    "quality"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "CCSpt Code Review",
+    "shortDescription": "Evidence-based code review with a standard report",
+    "longDescription": "Review code changes using a shared workflow, collect engineer clarification, verify findings, and produce a versioned report.",
+    "developerName": "CCSpt",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
+    "websiteURL": "https://github.com/chenchenz1235/ccspt-code-review-skill",
+    "defaultPrompt": [
+      "Use CCSpt Code Review to review the selected code and produce the standard report."
+    ]
+  }
+}
