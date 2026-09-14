@@ -51,6 +51,8 @@ def fetch_with_gh(timeout: float) -> str:
         [
             "gh",
             "api",
+            "--method",
+            "GET",
             "repos/chenchenz1235/ccspt-code-review-skill/contents/"
             "plugins/ccspt-code-review-skill/VERSION",
             "-f",
