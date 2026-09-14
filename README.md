@@ -2,7 +2,7 @@
 
 A cross-harness, versioned code-review workflow for Codex, Claude Code, and DeepSeek Harness.
 
-Current version: **0.1.1**
+Current version: **0.1.2**
 
 ## What this version proves
 
