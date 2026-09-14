@@ -1,0 +1,17 @@
+{
+  "name": "ccspt-tools",
+  "owner": {
+    "name": "CCSpt"
+  },
+  "plugins": [
+    {
+      "name": "ccspt-code-review-skill",
+      "source": "./plugins/ccspt-code-review-skill",
+      "description": "Evidence-based code review with a standard report.",
+      "version": "0.1.0",
+      "author": {
+        "name": "CCSpt"
+      }
+    }
+  ]
+}
