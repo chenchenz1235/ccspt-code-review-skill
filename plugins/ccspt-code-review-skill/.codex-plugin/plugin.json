@@ -1,6 +1,6 @@
 {
   "name": "ccspt-code-review-skill",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Run the CCSpt evidence-based code review workflow and produce a standardized report.",
   "author": {
     "name": "CCSpt",
