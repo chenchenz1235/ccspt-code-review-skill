@@ -1,0 +1,10 @@
+{
+  "name": "ccspt-code-review-skill",
+  "version": "0.1.0",
+  "description": "Run the CCSpt evidence-based code review workflow and produce a standardized report.",
+  "author": {
+    "name": "CCSpt"
+  },
+  "repository": "https://github.com/chenchenz1235/ccspt-code-review-skill",
+  "license": "UNLICENSED"
+}
