@@ -9,12 +9,22 @@ compatibility: Requires repository read access. Network access is optional and u
 
 Produce a reproducible review with evidence, not a generic style critique.
 
-## Start
+## Pre-review update gate
+
+Complete this gate before opening, reading, or analyzing any requested source file, diff, or review target.
 
 1. Read `VERSION` and record it as `skill_version`.
-2. Check the latest `plugins/ccspt-code-review-skill/skills/ccspt-code-review/VERSION` on the private GitHub repository. Prefer an authenticated GitHub connector when the harness provides one; otherwise run `scripts/check_version.py`. A failed update check must not block the review, and an available update must never be installed automatically.
-3. Identify the requested review scope. If no scope is stated, review the current change set; if that is unavailable, ask for the target files or feature.
-4. Accept engineer-provided intent, constraints, known risks, and test evidence at any time. Treat them as context, not proof that the implementation is correct.
+2. Check the latest `plugins/ccspt-code-review-skill/skills/ccspt-code-review/VERSION` on the private GitHub repository. Prefer an authenticated GitHub connector when the harness provides one; otherwise run `scripts/check_version.py`.
+3. If the installed version is current, continue directly to the review.
+4. If a newer version exists, stop before processing the review target and tell the user both versions: `发现新版本：当前 <installed>，最新 <latest>。是否先更新？` Wait for the user's choice.
+5. If the user chooses to update, use the harness's supported Skill or plugin update mechanism, verify the installed version, and only then begin processing the review target. If updating fails or no updater is available, explain the problem and ask whether to continue with the installed version.
+6. If the user declines or postpones the update, continue with the installed version.
+7. Never install an update without the user's choice. If the update check is unavailable, do not block the review; record the unavailable status and continue.
+
+## Start
+
+1. Identify the requested review scope. If no scope is stated, review the current change set; if that is unavailable, ask for the target files or feature.
+2. Accept engineer-provided intent, constraints, known risks, and test evidence at any time. Treat them as context, not proof that the implementation is correct.
 
 ## Review
 
