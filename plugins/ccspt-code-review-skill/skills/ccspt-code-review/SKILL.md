@@ -12,7 +12,7 @@ Produce a reproducible review with evidence, not a generic style critique.
 ## Start
 
 1. Read `../../VERSION` and record it as `skill_version`.
-2. If local execution and network access are available, run `../../scripts/check_version.py`. A failed update check must not block the review, and an available update must never be installed automatically.
+2. Check the latest `plugins/ccspt-code-review-skill/VERSION` on the private GitHub repository. Prefer an authenticated GitHub connector when the harness provides one; otherwise run `../../scripts/check_version.py`. A failed update check must not block the review, and an available update must never be installed automatically.
 3. Identify the requested review scope. If no scope is stated, review the current change set; if that is unavailable, ask for the target files or feature.
 4. Accept engineer-provided intent, constraints, known risks, and test evidence at any time. Treat them as context, not proof that the implementation is correct.
 
