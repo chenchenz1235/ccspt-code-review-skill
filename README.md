@@ -1,0 +1,26 @@
+# CCSpt Code Review Skill
+
+A cross-harness, versioned code-review workflow for Codex, Claude Code, and DeepSeek Harness.
+
+Current version: **0.1.0**
+
+## What this first version proves
+
+- One canonical `SKILL.md` is shared by multiple agent harnesses.
+- Every report records the skill version and update status.
+- The demo rule `CR-DEMO-001` detects unbounded C string copies such as `strcpy`.
+- Engineer feedback is generated locally and is never uploaded or emailed without explicit approval.
+
+## Repository layout
+
+- `plugins/ccspt-code-review-skill/`: portable plugin and shared skill.
+- `.agents/plugins/marketplace.json`: Codex repository marketplace.
+- `.claude-plugin/marketplace.json`: Claude Code marketplace.
+- `tests/demo-case/`: reproducible demonstration fixture.
+
+## First test
+
+Ask the agent to use **ccspt-code-review** to review `tests/demo-case/demo.c`.
+The result should identify `CR-DEMO-001` and show skill version `0.1.0`.
+
+This repository is private. Do not upload company source code, diffs, logs, credentials, or customer information as feedback.
