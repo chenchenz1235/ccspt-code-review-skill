@@ -23,4 +23,8 @@ Current version: **0.1.0**
 Ask the agent to use **ccspt-code-review** to review `tests/demo-case/demo.c`.
 The result should identify `CR-DEMO-001` and show skill version `0.1.0`.
 
+## Private-repository update checks
+
+An authenticated GitHub connector is preferred. Command-line users can use an authenticated `gh` CLI or provide `GH_TOKEN`/`GITHUB_TOKEN` through their existing secret-management setup. The checker never prints the token. If no authenticated route is available, update status is reported as unavailable instead of claiming the installation is current.
+
 This repository is private. Do not upload company source code, diffs, logs, credentials, or customer information as feedback.
