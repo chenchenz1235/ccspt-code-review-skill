@@ -1,0 +1,17 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "ccspt-code-review-skill",
+  "version": "0.1.0",
+  "description": "Run the CCSpt evidence-based code review workflow and produce a standardized report.",
+  "author": {
+    "name": "CCSpt"
+  },
+  "homepage": "https://github.com/chenchenz1235/ccspt-code-review-skill",
+  "repository": "https://github.com/chenchenz1235/ccspt-code-review-skill",
+  "license": "UNLICENSED",
+  "keywords": [
+    "code-review",
+    "agent-skills",
+    "quality"
+  ]
+}
