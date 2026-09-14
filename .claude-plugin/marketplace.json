@@ -8,7 +8,7 @@
       "name": "ccspt-code-review-skill",
       "source": "./plugins/ccspt-code-review-skill",
       "description": "Evidence-based code review with a standard report.",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "author": {
         "name": "CCSpt"
       }
