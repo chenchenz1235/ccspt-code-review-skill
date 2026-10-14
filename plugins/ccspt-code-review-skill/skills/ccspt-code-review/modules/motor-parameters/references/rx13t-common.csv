@@ -1,0 +1,89 @@
+参数,分类,文件1公式,文件2公式,文件1行号,文件2行号
+rpm_to_radps_coef,共同公式或值,g_sys_ctrl_param.pole_pairs * 6.28f/60,g_sys_ctrl_param.pole_pairs * 6.28f/60,439,420
+radps_to_rpm_coef,共同公式或值,60/6.28f/g_sys_ctrl_param.pole_pairs,60/6.28f/g_sys_ctrl_param.pole_pairs,440,421
+lamda,共同公式或值,g_sys_ctrl_param.Kt/(1.5f * g_sys_ctrl_param.pole_pairs),g_sys_ctrl_param.Kt/(1.5f * g_sys_ctrl_param.pole_pairs),441,422
+speed_min_relay,共同公式或值,g_sys_ctrl_param.speed_min * 0.8,g_sys_ctrl_param.speed_min * 0.8,462,436
+locate_id_rate,共同公式或值,g_sys_ctrl_param.locate_id_cmd/(0.5f/g_sys_ctrl_param.Tspeedloop),g_sys_ctrl_param.locate_id_cmd/(0.5f/g_sys_ctrl_param.Tspeedloop),469,439
+locate_0_angle_time_cnt,共同公式或值,(u32)(g_sys_ctrl_param.locate_0_angle_time / g_sys_ctrl_param.Tmotorlogic),(u32)(g_sys_ctrl_param.locate_0_angle_time / g_sys_ctrl_param.Tmotorlogic),470,440
+drag_fixed_angle,共同公式或值,g_sys_ctrl_param.mcu_drag_fixed_angle * g_sys_ctrl_param.pole_pairs * (-1),g_sys_ctrl_param.mcu_drag_fixed_angle * g_sys_ctrl_param.pole_pairs * (-1),471,441
+drag_fixed_angle_time_cnt,共同公式或值,(u32)(g_sys_ctrl_param.drag_fixed_angle_time / g_sys_ctrl_param.Tmotorlogic),(u32)(g_sys_ctrl_param.drag_fixed_angle_time / g_sys_ctrl_param.Tmotorlogic),472,442
+enter_closed_wait_time_cnt,共同公式或值,(u32)(g_sys_ctrl_param.enter_closed_wait_time / g_sys_ctrl_param.Tmotorlogic),(u32)(g_sys_ctrl_param.enter_closed_wait_time / g_sys_ctrl_param.Tmotorlogic),473,443
+drag_to_closed_threshold,共同公式或值,g_sys_ctrl_param.mcu_drag_to_closed_wr * g_sys_ctrl_param.rpm_to_radps_coef,g_sys_ctrl_param.mcu_drag_to_closed_wr * g_sys_ctrl_param.rpm_to_radps_coef,474,444
+drag_speed_rate,共同公式或值,g_sys_ctrl_param.drag_speed_cmd_max / (g_sys_ctrl_param.mcu_drag_time / g_sys_ctrl_param.Tspeedloop),g_sys_ctrl_param.drag_speed_cmd_max / (g_sys_ctrl_param.mcu_drag_time / g_sys_ctrl_param.Tspeedloop),477,447
+torque_to_speed_threshold,共同公式或值,g_sys_ctrl_param.mcu_torque_to_speed_wr * g_sys_ctrl_param.rpm_to_radps_coef,g_sys_ctrl_param.mcu_torque_to_speed_wr * g_sys_ctrl_param.rpm_to_radps_coef,480,450
+speed_kp,共同公式或值,g_sys_ctrl_param.mcu_speed_kp_gain * 2 * g_sys_ctrl_param.mcu_speed_zeta * g_sys_ctrl_param.Jm * g_sys_ctrl_param.mcu_speed_wn/(g_sys_ctrl_param.Kt),g_sys_ctrl_param.mcu_speed_kp_gain * 2 * g_sys_ctrl_param.mcu_speed_zeta * g_sys_ctrl_param.Jm * g_sys_ctrl_param.mcu_speed_wn/(g_sys_ctrl_param.Kt),481,451
+speed_ki_Ts,共同公式或值,g_sys_ctrl_param.mcu_speed_ki_Ts_gain * g_sys_ctrl_param.Jm * g_sys_ctrl_param.mcu_speed_wn*g_sys_ctrl_param.mcu_speed_wn * g_sys_ctrl_param.Tspeedloop/(g_sys_ctrl_param.Kt),g_sys_ctrl_param.mcu_speed_ki_Ts_gain * g_sys_ctrl_param.Jm * g_sys_ctrl_param.mcu_speed_wn*g_sys_ctrl_param.mcu_speed_wn * g_sys_ctrl_param.Tspeedloop/(g_sys_ctrl_param.Kt),482,452
+vdc_sqrt3_max,共同公式或值,g_sys_ctrl_param.vdc_max/1.732,g_sys_ctrl_param.vdc_max/1.732,485,455
+vdc_sqrt3_min,共同公式或值,g_sys_ctrl_param.vdc_min/1.732,g_sys_ctrl_param.vdc_min/1.732,486,456
+mcu_pwm_period_cnt,共同公式或值,(u32)(g_sys_ctrl_param.mcu_system_clock * (CONST_1E6 /g_sys_ctrl_param.mcu_carrier_freq) * 0.5f),(u32)(g_sys_ctrl_param.mcu_system_clock * (CONST_1E6 /g_sys_ctrl_param.mcu_carrier_freq) * 0.5f),487,457
+mcu_pwm_duty_min_cnt,共同公式或值,(u32)(g_sys_ctrl_param.mcu_down_mos_ton_min * g_sys_ctrl_param.mcu_system_clock/2),(u32)(g_sys_ctrl_param.mcu_down_mos_ton_min * g_sys_ctrl_param.mcu_system_clock/2),488,458
+mcu_up_mos_on_duty_min_cnt,共同公式或值,(u32)(g_sys_ctrl_param.mcu_up_mos_ton_min * g_sys_ctrl_param.mcu_system_clock/2),(u32)(g_sys_ctrl_param.mcu_up_mos_ton_min * g_sys_ctrl_param.mcu_system_clock/2),489,459
+mcu_pwm_duty_max_cnt,共同公式或值,(u32)(g_sys_ctrl_param.mcu_pwm_period_cnt - (u32)(g_sys_ctrl_param.mcu_up_mos_on_duty_min_cnt)),(u32)(g_sys_ctrl_param.mcu_pwm_period_cnt - (u32)(g_sys_ctrl_param.mcu_up_mos_on_duty_min_cnt)),490,460
+mcu_foc_timer_cnt,共同公式或值,(u32)(2000 * g_sys_ctrl_param.mcu_foc_clock),(u32)(2000 * g_sys_ctrl_param.mcu_foc_clock),491,461
+mcu_foc_wait_cnt,共同公式或值,(u32)(5 * g_sys_ctrl_param.mcu_foc_clock),(u32)(5 * g_sys_ctrl_param.mcu_foc_clock),492,462
+mcu_pwm_update_cnt,共同公式或值,(u32)(25 * g_sys_ctrl_param.mcu_foc_clock),(u32)(25 * g_sys_ctrl_param.mcu_foc_clock),493,463
+mcu_foc_Ts_cnt,共同公式或值,(u32)(g_sys_ctrl_param.mcu_foc_pwm_duty_ratio * (CONST_1E6 / g_sys_ctrl_param.mcu_carrier_freq * g_sys_ctrl_param.mcu_foc_clock)),(u32)(g_sys_ctrl_param.mcu_foc_pwm_duty_ratio * (CONST_1E6 / g_sys_ctrl_param.mcu_carrier_freq * g_sys_ctrl_param.mcu_foc_clock)),494,464
+mcu_foc_set_cnt,共同公式或值,g_sys_ctrl_param.mcu_foc_timer_cnt - g_sys_ctrl_param.mcu_foc_wait_cnt,g_sys_ctrl_param.mcu_foc_timer_cnt - g_sys_ctrl_param.mcu_foc_wait_cnt,495,465
+mcu_foc_comp_cnt,共同公式或值,g_sys_ctrl_param.mcu_foc_Ts_cnt - g_sys_ctrl_param.mcu_pwm_update_cnt - g_sys_ctrl_param.mcu_foc_wait_cnt,g_sys_ctrl_param.mcu_foc_Ts_cnt - g_sys_ctrl_param.mcu_pwm_update_cnt - g_sys_ctrl_param.mcu_foc_wait_cnt,496,466
+mcu_rx_pwm_dead_cnt,共同公式或值,g_sys_ctrl_param.mcu_dead_time * g_sys_ctrl_param.mcu_system_clock,g_sys_ctrl_param.mcu_dead_time * g_sys_ctrl_param.mcu_system_clock,497,467
+mcu_current_sample_bias_cnt,共同公式或值,(u32)(g_sys_ctrl_param.mcu_current_sample_bias_time * g_sys_ctrl_param.mcu_system_clock),(u32)(g_sys_ctrl_param.mcu_current_sample_bias_time * g_sys_ctrl_param.mcu_system_clock),498,468
+Tfoc,共同公式或值,(g_sys_ctrl_param.mcu_foc_Ts_cnt/CONST_1E6)/g_sys_ctrl_param.mcu_foc_clock,(g_sys_ctrl_param.mcu_foc_Ts_cnt/CONST_1E6)/g_sys_ctrl_param.mcu_foc_clock,499,469
+Tsvpwm,共同公式或值,g_sys_ctrl_param.Tfoc / g_sys_ctrl_param.mcu_foc_pwm_duty_ratio,g_sys_ctrl_param.Tfoc / g_sys_ctrl_param.mcu_foc_pwm_duty_ratio,500,470
+Tvdc,共同公式或值,g_sys_ctrl_param.Tfoc,g_sys_ctrl_param.Tfoc,501,471
+Tdatavac,共同公式或值,g_sys_ctrl_param.Tfoc,g_sys_ctrl_param.Tfoc,502,472
+id_kp,共同公式或值,g_sys_ctrl_param.Ld * g_sys_ctrl_param.mcu_current_wc * g_sys_ctrl_param.mcu_id_kp_gain,g_sys_ctrl_param.Ld * g_sys_ctrl_param.mcu_current_wc * g_sys_ctrl_param.mcu_id_kp_gain,506,475
+id_ki,共同公式或值,g_sys_ctrl_param.Rs *  g_sys_ctrl_param.mcu_current_wc * g_sys_ctrl_param.mcu_id_ki_gain,g_sys_ctrl_param.Rs *  g_sys_ctrl_param.mcu_current_wc * g_sys_ctrl_param.mcu_id_ki_gain,507,476
+iq_kp,共同公式或值,g_sys_ctrl_param.Lq * g_sys_ctrl_param.mcu_current_wc * g_sys_ctrl_param.mcu_iq_kp_gain,g_sys_ctrl_param.Lq * g_sys_ctrl_param.mcu_current_wc * g_sys_ctrl_param.mcu_iq_kp_gain,508,477
+iq_ki,共同公式或值,g_sys_ctrl_param.Rs *  g_sys_ctrl_param.mcu_current_wc * g_sys_ctrl_param.mcu_iq_ki_gain,g_sys_ctrl_param.Rs *  g_sys_ctrl_param.mcu_current_wc * g_sys_ctrl_param.mcu_iq_ki_gain,509,478
+Lq_minus_Ld,共同公式或值,g_sys_ctrl_param.Lq - g_sys_ctrl_param.Ld,g_sys_ctrl_param.Lq - g_sys_ctrl_param.Ld,516,486
+mcu_t12_low_limit_cnt,共同公式或值,(u32)(g_sys_ctrl_param.mcu_t12_low_limit * g_sys_ctrl_param.mcu_system_clock),(u32)(g_sys_ctrl_param.mcu_t12_low_limit * g_sys_ctrl_param.mcu_system_clock),521,491
+mcu_t12_up_limit_cnt,共同公式或值,g_sys_ctrl_param.mcu_pwm_period_cnt- g_sys_ctrl_param.mcu_t12_low_limit_cnt - 2 * g_sys_ctrl_param.mcu_pwm_duty_min_cnt,g_sys_ctrl_param.mcu_pwm_period_cnt- g_sys_ctrl_param.mcu_t12_low_limit_cnt - 2 * g_sys_ctrl_param.mcu_pwm_duty_min_cnt,522,492
+mcu_inj_trigger_calc_cnt,共同公式或值,(u32)(g_sys_ctrl_param.mcu_inj_trigger_calc * g_sys_ctrl_param.mcu_system_clock),(u32)(g_sys_ctrl_param.mcu_inj_trigger_calc * g_sys_ctrl_param.mcu_system_clock),523,493
+inv_Ld,共同公式或值,1.0/g_sys_ctrl_param.Ld,1.0/g_sys_ctrl_param.Ld,526,496
+inv_Lq,共同公式或值,1.0/g_sys_ctrl_param.Lq,1.0/g_sys_ctrl_param.Lq,527,497
+Lq_inv_Ld,共同公式或值,g_sys_ctrl_param.Lq/g_sys_ctrl_param.Ld,g_sys_ctrl_param.Lq/g_sys_ctrl_param.Ld,528,498
+Ld_inv_Lq,共同公式或值,g_sys_ctrl_param.Ld/g_sys_ctrl_param.Lq,g_sys_ctrl_param.Ld/g_sys_ctrl_param.Lq,529,499
+Rs_inv_Ld,共同公式或值,g_sys_ctrl_param.Rs/g_sys_ctrl_param.Ld,g_sys_ctrl_param.Rs/g_sys_ctrl_param.Ld,530,500
+Rs_inv_Lq,共同公式或值,g_sys_ctrl_param.Rs/g_sys_ctrl_param.Lq,g_sys_ctrl_param.Rs/g_sys_ctrl_param.Lq,531,501
+L11,共同公式或值,(2 * g_sys_ctrl_param.mcu_observer_wn - g_sys_ctrl_param.Rs/g_sys_ctrl_param.Ld),(2 * g_sys_ctrl_param.mcu_observer_wn - g_sys_ctrl_param.Rs/g_sys_ctrl_param.Ld),532,502
+L22,共同公式或值,(2 * g_sys_ctrl_param.mcu_observer_wn - g_sys_ctrl_param.Rs/g_sys_ctrl_param.Lq),(2 * g_sys_ctrl_param.mcu_observer_wn - g_sys_ctrl_param.Rs/g_sys_ctrl_param.Lq),533,503
+L31,共同公式或值,g_sys_ctrl_param.Ld * g_sys_ctrl_param.mcu_observer_wn * g_sys_ctrl_param.mcu_observer_wn,g_sys_ctrl_param.Ld * g_sys_ctrl_param.mcu_observer_wn * g_sys_ctrl_param.mcu_observer_wn,534,504
+L42,共同公式或值,g_sys_ctrl_param.Lq * g_sys_ctrl_param.mcu_observer_wn * g_sys_ctrl_param.mcu_observer_wn,g_sys_ctrl_param.Lq * g_sys_ctrl_param.mcu_observer_wn * g_sys_ctrl_param.mcu_observer_wn,535,505
+observer_we_max,共同公式或值,(g_sys_ctrl_param.speed_max + 1000) * g_sys_ctrl_param.rpm_to_radps_coef | (g_sys_ctrl_param.speed_max + 1500) * g_sys_ctrl_param.rpm_to_radps_coef,(g_sys_ctrl_param.speed_max + 1000) * g_sys_ctrl_param.rpm_to_radps_coef | (g_sys_ctrl_param.speed_max + 1500) * g_sys_ctrl_param.rpm_to_radps_coef,"538,542","509,513"
+pll_kp,共同公式或值,2 * g_sys_ctrl_param.test14 * g_sys_ctrl_param.test13,2 * g_sys_ctrl_param.test14 * g_sys_ctrl_param.test13,546,518
+pll_ki,共同公式或值,g_sys_ctrl_param.test13 * g_sys_ctrl_param.test13,g_sys_ctrl_param.test13 * g_sys_ctrl_param.test13,547,519
+pll_ka,共同公式或值,1/(3 * g_sys_ctrl_param.test14 * g_sys_ctrl_param.test13 ),1/(3 * g_sys_ctrl_param.test14 * g_sys_ctrl_param.test13 ),548,520
+brake_run_mode_switch_we,共同公式或值,g_sys_ctrl_param.brake_run_mode_switch_wr * g_sys_ctrl_param.rpm_to_radps_coef,g_sys_ctrl_param.brake_run_mode_switch_wr * g_sys_ctrl_param.rpm_to_radps_coef,551,523
+brake_drag_switch_we,共同公式或值,g_sys_ctrl_param.brake_drag_switch_wr * g_sys_ctrl_param.rpm_to_radps_coef,g_sys_ctrl_param.brake_drag_switch_wr * g_sys_ctrl_param.rpm_to_radps_coef,552,524
+brake_is_setup_time_cnt,共同公式或值,(u32)(g_sys_ctrl_param.brake_is_setup_time / g_sys_ctrl_param.Tmotorlogic),(u32)(g_sys_ctrl_param.brake_is_setup_time / g_sys_ctrl_param.Tmotorlogic),553,525
+brake_time_max_cnt,共同公式或值,(u32)(g_sys_ctrl_param.brake_time_max / g_sys_ctrl_param.Tmotorlogic),(u32)(g_sys_ctrl_param.brake_time_max / g_sys_ctrl_param.Tmotorlogic),554,526
+lose_phase_is_min,共同公式或值,0.1 * g_sys_ctrl_param.is_max,0.1 * g_sys_ctrl_param.is_max,575,531
+lose_phase_is_diff_min,共同公式或值,0.8 * g_sys_ctrl_param.is_max,0.8 * g_sys_ctrl_param.is_max,576,532
+v15_max,共同公式或值,20,20,577,533
+v15_min,共同公式或值,12,12,578,534
+power_max_cnt,共同公式或值,2500,2500,580,536
+current_ad_offset_diff_max,共同公式或值,250,250,589,549
+over_speed_max_offset,共同公式或值,500 | 1000,500 | 1000,"593,597","553,557"
+dc_over_current_cnt,共同公式或值,2500,2500,600,560
+restart_speed_threshold,共同公式或值,g_sys_ctrl_param.mcu_restart_speed_wr * g_sys_ctrl_param.rpm_to_radps_coef,g_sys_ctrl_param.mcu_restart_speed_wr * g_sys_ctrl_param.rpm_to_radps_coef,604,564
+stop_wr_cnt,共同公式或值,(u32)(g_sys_ctrl_param.stop_wr_time / g_sys_ctrl_param.Tdataspeed),(u32)(g_sys_ctrl_param.stop_wr_time / g_sys_ctrl_param.Tdataspeed),607,567
+power_limit_loop_lower_limit,共同公式或值,g_sys_ctrl_param.speed_min - g_sys_ctrl_param.speed_max,g_sys_ctrl_param.speed_min - g_sys_ctrl_param.speed_max,610,570
+test1,共同公式或值,2,2,617,573
+test4,共同公式或值,(g_sys_ctrl_param.param1-245)*0.4,(g_sys_ctrl_param.param1-245)*0.4,619,575
+test5,共同公式或值,2,2,620,576
+test6,共同公式或值,(g_sys_ctrl_param.param3-205)*0.2,(g_sys_ctrl_param.param3-205)*0.2,621,577
+test8,共同公式或值,(g_sys_ctrl_param.param13-245)*0.5,(g_sys_ctrl_param.param13-245)*0.5,623,579
+test9,共同公式或值,(g_sys_ctrl_param.param10-205)*0.5,(g_sys_ctrl_param.param10-205)*0.5,624,580
+test10,共同公式或值,(g_sys_ctrl_param.param2-245)*0.4,(g_sys_ctrl_param.param2-245)*0.4,625,581
+test11,共同公式或值,(g_sys_ctrl_param.param6-245)*0.2,(g_sys_ctrl_param.param6-245)*0.2,626,582
+test12,共同公式或值,(g_sys_ctrl_param.param8-255)*0.5,(g_sys_ctrl_param.param8-255)*0.5,627,583
+test15,共同公式或值,(g_sys_ctrl_param.param15-245)*0.4,(g_sys_ctrl_param.param15-245)*0.4,629,585
+test16,共同公式或值,(g_sys_ctrl_param.param5-225)*0.5,(g_sys_ctrl_param.param5-225)*0.5,630,586
+test17,共同公式或值,(g_sys_ctrl_param.param11-235)*0.4,(g_sys_ctrl_param.param11-235)*0.4,631,587
+test18,共同公式或值,g_sys_ctrl_param.test4 * g_sys_ctrl_param.rpm_to_radps_coef,g_sys_ctrl_param.test4 * g_sys_ctrl_param.rpm_to_radps_coef,632,588
+test19,共同公式或值,(int)(g_sys_ctrl_param.test8 / g_sys_ctrl_param.Tspeedloop),(int)(g_sys_ctrl_param.test8 / g_sys_ctrl_param.Tspeedloop),633,589
+test20,共同公式或值,g_sys_ctrl_param.test9 * g_sys_ctrl_param.rpm_to_radps_coef,g_sys_ctrl_param.test9 * g_sys_ctrl_param.rpm_to_radps_coef,634,590
+test21,共同公式或值,2 * g_sys_ctrl_param.test12 * g_sys_ctrl_param.test11,2 * g_sys_ctrl_param.test12 * g_sys_ctrl_param.test11,635,591
+test22,共同公式或值,g_sys_ctrl_param.test11 * g_sys_ctrl_param.test11,g_sys_ctrl_param.test11 * g_sys_ctrl_param.test11,636,592
+test23,共同公式或值,2 * g_sys_ctrl_param.test16 * g_sys_ctrl_param.test15,2 * g_sys_ctrl_param.test16 * g_sys_ctrl_param.test15,637,593
+test24,共同公式或值,g_sys_ctrl_param.test15 * g_sys_ctrl_param.test15,g_sys_ctrl_param.test15 * g_sys_ctrl_param.test15,638,594

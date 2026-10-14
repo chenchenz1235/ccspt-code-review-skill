@@ -1,15 +1,16 @@
 ---
 name: ccspt-code-review
-description: Review selected code, a change set, or a feature implementation using the CCSpt evidence-based process, engineer clarification loop, and standardized report. Use when a user asks for code review, change review, defect review, or review-report generation.
+description: 按需路由CCSpt软件审核模块，审核电机控制参数及派生计算，结合项目资料输出按优先级排序、可展开的HTML报告；也用于维护审核规则。
 license: UNLICENSED
 compatibility: Requires repository read access. Network access is optional and used only to check for a newer skill version.
 ---
 
-# CCSpt Code Review
+# CCSpt 软件审核
 
-Produce a reproducible review with evidence, not a generic style critique.
+一个统一入口，按审核目标加载模块。当前已实现电机参数审核，其他代码功能不宣称已有专项规则。默认只读审核，不修改固件。
 
 ## Pre-review update gate
+
 
 Complete this gate before opening, reading, or analyzing any requested source file, diff, or review target.
 
@@ -21,31 +22,29 @@ Complete this gate before opening, reading, or analyzing any requested source fi
 6. If the user declines or postpones the update, continue with the installed version.
 7. Never install an update without the user's choice. If the update check is unavailable, do not block the review; record the unavailable status and continue.
 
-## Start
 
-1. Identify the requested review scope. If no scope is stated, review the current change set; if that is unavailable, ask for the target files or feature.
-2. Accept engineer-provided intent, constraints, known risks, and test evidence at any time. Treat them as context, not proof that the implementation is correct.
+## 范围与路由
 
-## Review
+先确认目标文件、工程版本、用户约束和已有证据。执行上述更新检测后再读取审核目标。
 
-Read [review policy](references/review-policy.md) before reviewing. Inspect relevant implementation, callers, tests, configuration, and error paths. Use existing repository tools when they materially improve confidence.
+| 用户任务 | 按需加载 |
+|---|---|
+| matlab_variable.c、motor参数、派生计算、硬件系数、周期及参数字典 | [电机参数模块](modules/motor-parameters/MODULE.md) |
+| 更新规则或复核反馈 | 加载对应模块及[报告规范](references/report-policy.md) |
+| 尚无模块的代码功能 | 明确专项规则尚未建立，依据用户提供的规则处理，不套用已移除的演示规则 |
 
-Every reported finding must contain a concrete failure mode and code evidence. Do not report preferences, speculative risks without a plausible path, or issues outside the requested scope. Deduplicate findings.
+立项单、电机/硬件资料和缺失信息处理由所用模块定义；项目公共信息共用，不能从文件名推断电压/功率等级。模块交叉引用同一问题时去重。
 
-For the bundled demonstration fixture, apply `CR-DEMO-001` from the review policy.
+## 统一输出
 
-## Clarification
+读取[报告与优先级规范](references/report-policy.md)。默认交付离线HTML，问题概览表按高/中/低排序；点击展开证据、计算和建议，支持搜索筛选。优先级与确认状态独立。
 
-When missing engineer knowledge could change a finding, ask a focused question and mark the finding `needs-confirmation`. Incorporate the answer into the final report. Never upload or email engineer content without explicit user approval for that specific destination.
+报告记录skill版本、更新检测状态、规则来源、目标版本/文件范围、项目依据、检查及未检查内容。真实参数名/含义优先，内部编码只用于计算追溯；范围冲突合并明细表。功能/保护风险优先于元数据。
 
-## Output
+使用 `scripts/render_report.py <结构化报告.json> --output <报告.html>`。结构见[报告数据格式](references/report-policy.md)。计算JSON不是完整报告输入，必须由审核者根据证据整理 findings。
 
-Use [the report template](assets/report-template.md). Include:
+## 规则维护
 
-- skill version, local ruleset hash when available, harness/model if known, reviewed revision or file set, and update-check result;
-- findings ordered by severity;
-- exact file and line evidence;
-- engineer responses and resulting status;
-- checks run, checks not run, and remaining uncertainty.
+用户确认覆盖旧规则。新增例外注明项目与适用条件，不能推广为所有项目都通过。项目资料留在用户工程，模块不包含示例工程源代码、原理图或客户立项资料。
 
-If feedback is requested, produce a sanitized feedback package using [the feedback schema](references/feedback-schema.md). Creating the package does not authorize sending it.
+如请求反馈，按[反馈格式](references/feedback-schema.md)生成本地脱敏包；不自动上传。维护总入口、模块、脚本和版本后，运行离线测试，再发布。

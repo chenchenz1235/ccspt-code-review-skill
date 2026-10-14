@@ -24,7 +24,7 @@ RAW_URL = (
     "ccspt-code-review-skill/main/plugins/ccspt-code-review-skill/"
     "skills/ccspt-code-review/VERSION"
 )
-VERSION_RE = re.compile(r"^[0-9]+\\.[0-9]+\\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$")
+VERSION_RE = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$")
 
 
 def validate(value: str, source: str) -> str:
@@ -67,7 +67,7 @@ def fetch_with_gh(timeout: float) -> str:
         text=True,
         timeout=timeout,
     )
-    encoded = completed.stdout.replace("\\n", "").strip()
+    encoded = completed.stdout.replace("\n", "").strip()
     return base64.b64decode(encoded).decode("utf-8")
 
 

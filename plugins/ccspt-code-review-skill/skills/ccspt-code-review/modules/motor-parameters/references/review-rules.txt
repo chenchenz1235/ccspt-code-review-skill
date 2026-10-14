@@ -1,0 +1,110 @@
+参数审核规则草案 v0.1（2026-10-13）
+
+范围：driver/mcu_project/param/matlab_variable.c；当前配置是字典样本，不是通用默认值。ctrl 文件独立审核，不合并。
+依据优先级：参考文档优先；文档未覆盖采用用户口述；代码确认映射、单位、时序和实际生效逻辑。文档与代码冲突报告差异。一般/建议/示例不得提升为固定约束。
+状态：规则收集及字典初版；不是完整审核报告，不修改固件，不生成 skill。
+2026-10-13确认：当前项目为风机。正式审核必须先输入立项单，从中取得电压等级、功率等级和项目要求；没有立项单，要求使用者提供并暂停后续正式审核。命名不作为等级依据。规则整理与基准比较可继续。
+2026-10-13确认：fall_speed_ipm_temper-forbid_rise_speed_ipm_temper通常为0.1℃，例如降频100℃、禁升频99.9℃；作为经验建议。
+2026-10-13确认：torque_mode_on=1时，iq_cmd_switch/is_max<0.3提示，通常约0.8；仍需iq_cmd_switch<is_max。
+2026-10-13确认：speed_rising_rate_limit及speed_falling_rate_limit均取消200经验提示，保留基本范围检查。
+2026-10-13确认：Parameter_Review/matlab_variable.c与matlab_variable2.c中matlab_calc_param_init共同内容作为RX13T基准，差异单列待确认；共同公式不代表不同项目计算结果应相同。
+
+01 参数管理
+中文名称与英文标识同时完全一致才报告重名。分组标记数量与实际有效参数条目一致；注释掉的赋值不计入。
+表单字符串与表单信息备注一致。检查备注最小最大值、实际值范围、可见参数说明、单位倍率及枚举解释。
+功能关闭不豁免基本范围和元数据检查；专项性能检查按生效条件执行。
+
+02 电机和运行
+电机参数依据实际资料。Ld/Lq正值和范围为基本检查；Ld<=Lq<10Ld为待确认合理性建议，不作为硬性错误。
+speed_min<100提醒；speed_rising_rate_limit与speed_falling_rate_limit均取消200经验阈值，仅基本范围。
+vsp_voltage_start通常<2V；vsp_voltage_end通常9-10V；duty_start通常1000，duty_end通常9000-10000；control_mA_start通常4，end通常19-20。
+fg_rps通常1-12，核对对应输出实现、定时器可达频率及最高转速。
+
+03 硬件与周期
+硬件系数依据原理图计算，待提供；with_relay对应电源继电器。acmax_dc_sub_threshold默认50，wait_v15_stable_time默认0.1。
+执行周期追溯中断时钟、寄存器、调用分频、条件调用及实际模型路径，不只信任周期备注。
+公共信息：负载、电压/功率等级、MCU、功率管型号额定电流、采样方式、外设/引脚、保护信号、模型周期、资料来源及版本。
+
+04 运行模式和拖动
+run_mode_select通常1；run_mode_platform_wr>=speed_min。文档：风机平台可等于最低转速，低速项目可提高平台；压缩机通常2400或客户要求。
+风机locate_0_angle_on和drag_on为0，压缩机可1。drag_iq_cmd通常0。
+drag_id_cmd<is_max且<0.8Hardware_over_i；通常0.2-0.8。比较前统一电流口径，符号处理待代码确认。
+drag_speed_cmd_max通常等于平台转速；mcu_drag_to_closed_wr<=drag_speed_cmd_max，通常相差0-50rpm。
+torque_mode_on通常0，压缩机可1；speed_mode_on应1。
+torque_mode_on=1时：iq_cmd_switch<is_max，通常0.8is_max，低于0.3is_max提示；mcu_torque_to_speed_wr<平台转速。
+
+05 速度环与PWM
+mcu_speed_wn风机通常<=10，压缩机10-30；zeta通常0.5-1.2；kp_gain和ki_Ts_gain通常1。
+speed_loop_init_is_normal和brake<is_max；speed_wc_max_des>=min_des。
+变速度带宽on>off；max!=min时转速阈值间距建议>=100rpm；vary_interval_speed_bandwidth建议<0.1，单位和实际增量逻辑查代码。
+OM_mode通常0或1。已知搭配：down_mos_ton_min=7、dead_time=2、current_sample_bias_time=0.6；其他搭配核实，不自动判错。
+风机RX13T常用固定搭配carrier_freq=16000、foc_pwm_duty_ratio=4；允许已验证的运行动态切换，检查全部状态。
+单相PFC/24T、三相PFC/26T的细则待补充。prediction_thetae_ratio通常0-1；is_min固定0。
+
+06 电流与带宽
+is_start<=is_run；文档is_start通常0.7is_run。is_max追查启动/运行实际赋值和切换滞回。
+统一峰值/有效值/相电流口径后检查is_max<软件过流<硬件过流；分别列出间距，不虚构统一百分比。
+实际保护顺序考虑采样、滤波、持续计数、关断延迟和容差；无法保证所有突发故障由软件先动作。
+本项目软件过流初始化：is_run+(Hardware_over_i-is_run)*0.45；运行is_max变化时不应假定软件阈值同步更新。
+电频率=最高rpm*极对数/60；电角频率=2pi*电频率。current_wc为rad/s，结合实际Tfoc、采样/PWM延迟及解耦审核，不凭统一带宽比判错。
+变电流带宽：正值、max>=min、阈值on>off、更新步长及上下限越过、切换瞬态；is_max系数核对全状态电流限制。
+不开弱磁：vd_vdc_limit_coef=1、vq=1.1、vq>vd；开弱磁遵循备注及实现。
+
+07 MTPA、弱磁、抗饱和
+MTPA两个开关可开可关；torque开关含义查代码，不照抄口述笔误。
+文档mtpa_switch_rpm与平台一致；>speed_max禁用方式需确认当前实现。口述最低转速方案保留为历史经验。
+风机弱磁通常关；压缩机水泵按需。weaken_vdc_coef通常0.95，不能将0.95套用至weaken_ki等全部系数。
+weaken_id_min=fw_id_lower_limit_coef*is_max，核对负号、允许d轴电流及动态变化。
+ACLOS_vdc_coef>weaken_vdc_coef；ACLOS_lower_speed当前为负值，需查是降速量还是绝对下限；最终转速不能越过设计下限，压缩机通常为平台。
+
+08 观测器与刹车
+单电阻、直流风机控制环和谐波抑制暂不专项审核；共振跳频启用时追motor_mode_Tspeedloop。
+反电势观测器wn结合离散实现、Ld/Lq/Rs和Tfoc审核；文档无通用阈值。
+pll_we_LPF_wc风机通常100，其他负载0可表示关闭；pll_emfdq_ratio_max=2、min=-1通常不改。
+风机刹车开，其他负载关。brake_is_judge用于占空比判断阶段电流幅值，具体关系查实现。
+刹车电压建议recover<over<vdc_max，间距结合母线继续上升、采样/滤波和响应延迟；防止刹车期间过压报错。此关联是新增审核建议。
+
+09 保护及通信
+pfc_force_ctrl_enable=0；step_out3_startup_fail=0；power_check_on=0。
+有有效15V/VAC采集开启对应保护；区分模拟采集与数字异常输入。POE对应FO_level_check_on开启；PFC同理。
+双MCU定期通信开启comm_inner_check_on；单MCU不需要。外部通信超时按客户断联停机要求，有通信未开则提醒。
+error_log_switch_on通常开。VDC/VAC保护检查触发恢复次序、正常运行区间、硬件等级和刹车关联。
+step_out_set结合实测运行及堵转反电势确定，不能靠固定通用值。
+current_zero_ad_offset通常2048；three_phase_lose_phase_voltage_offset通常0.7-0.8。
+stop_forever_enable通常关，开启提示确认客户要求；启动重启通常仅冰箱压缩机开。
+延时停机需确保停机后立即重启无启动失败风险；以顺风能力30%为例，建议stop_wr=0.3speed_max，并给出推荐值与原因，忽略代码偏移。
+
+10 限频与功率
+vdc_linear_limit_enable、ipm_temp_limit_enable必须开；限频2-7专项按开关启用。
+核对阈值顺序、恢复滞回、系数范围和最小转速，不用“符合常识”作为独立判错依据。
+温度保护点需硬件确认，梯度通常5℃；ipm_temper_max_recover=ipm_temper_max-10℃。
+forbid_rise_speed_ipm_temper宜比fall_speed_ipm_temper低0.1℃，如99.9℃与100℃，作为经验提示。
+power_max_set>1.25项目功率提醒；客户上限另行核对，项目功率等级由资料确认，不能只取文件名。
+
+11 间接参数和固定计算区
+对照表映射见间接参数映射.csv。先还原实际意义和数值再检查，不审param编码数值的直觉大小。
+test1=2、test5=2、test7=2文档固定；当前test7=param0，因此核对param0及所有后续赋值。
+test13风机约80，压缩机200-250；test14风机通常0.7。test18-24依赖test4/8/9/11/12/15/16和转换系数、周期。
+文档回切转速test9=-100；当前param10=5还原-100，与表中示例-110不同，示例不作为硬性约束。
+扰动周期通常2.5s、bias通常2；幅度和启动PLL带宽需要启动波形及多角度验证，不套用表中单个示例。
+刹车滤波带宽通常等于运行滤波；刹车PLL带宽通常等于启动值或高1-2；启动/刹车zeta通常0.5。
+matlab_calc_param_init以MCU对应已验证版本为基准，不建议员工修改。允许时间阈值：single_phase_lose_phase_cnt、step_out_cnt、lose_phase_cnt、over_speed_cnt、linear_step_out_cnt。
+step_out_cnt和linear_step_out_cnt文档约10s；其余目标时间待项目要求。按实际计数增长/清零/饱和/条件还原时长，考虑运行覆盖。
+three_phase_lose_phase_cnt等关联项及中断动态覆盖需追踪，不能只检查允许列表。
+
+12 后续流程草案
+收集项目事实及资料版本→基本元数据检查→按字典解码参数→条件规则及交叉约束→必要代码/原理图追溯→报告错误、经验风险、缺少依据、文档代码差异。
+每个问题记录位置、当前值、依据、适用条件、证据、建议及确认结果。新增经验规则需用户确认后纳入，不自动升级。
+字典来源文件变化时重新校验受影响条目；新增参数、单位/备注变化、映射变化、运行覆盖变化触发追查。
+先实际试审再固化skill。当前未覆盖的参数明确标记，未知不等同正确。
+
+## 用户确认的报告与审核约定（2026-10-14）
+
+- 默认交付独立离线HTML：按高/中/低排序，问题概览表，点击展开；严重程度与证据状态独立。功能/保护风险优先于元数据问题。
+- 延时停机按顺风能力核实停机后立即重启风险，报告给出推荐参数值及原因。以顺风能力30%为例，建议stop_wr=0.3*speed_max；本例1700rpm推荐510rpm。此项忽略代码转速偏移，不将偏移加入推荐值。
+- 本例850V母线过压阈值高于器件推荐工作上限已由用户接受，不再提示该项；不得推广成所有器件/项目都可忽略工作范围。
+- 产测/FCT特殊模型覆盖参数与保护开关默认通过，后续不提示此类覆盖。
+- MTPA开关被派生计算置为开启允许，不提示。
+- 对外先显示真实含义和对应参数名：运行PLL阻尼mcu_pll_zeta，而非test14；回切转速mcu_pll_to_linear_wr而非test9；回切反电势pll_to_linear_emfq而非test10。内部保留映射以计算追溯。
+- 参数与备注范围冲突合并成一个低优先级事项，展开表格展示参数、当前值、声明范围、位置、建议；不能按参数拆成大量主问题。
+- paramN/testN的单位问题不提示；保留独立解码、公式和实际值关系检查。

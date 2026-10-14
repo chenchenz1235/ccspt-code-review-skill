@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ccspt-code-review-skill",
-  "version": "0.1.2",
-  "description": "Run the CCSpt evidence-based code review workflow and produce a standardized report.",
+  "version": "0.2.0",
+  "description": "Modular CCSpt review: motor parameter calculations and interactive HTML reports, with pre-review update checks.",
   "author": {
     "name": "CCSpt"
   },

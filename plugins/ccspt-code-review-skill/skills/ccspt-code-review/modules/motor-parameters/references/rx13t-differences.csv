@@ -1,0 +1,44 @@
+参数,分类,文件1公式,文件2公式,文件1行号,文件2行号
+vsp_voltage_start_relay,差异待确认,1*0.8,g_sys_ctrl_param.vsp_voltage_start * 0.8,444,429
+vsp_kcoef,差异待确认,(g_ebm_Py2 - g_ebm_Py1)/(g_ebm_Px2 - g_ebm_Px1),(g_sys_ctrl_param.speed_max - g_sys_ctrl_param.speed_min)/(g_sys_ctrl_param.vsp_voltage_end - g_sys_ctrl_param.vsp_voltage_start),445,430
+vsp_bias,差异待确认,g_ebm_Py2 - g_sys_ctrl_param.vsp_kcoef * g_ebm_Px2,g_sys_ctrl_param.speed_max - g_sys_ctrl_param.vsp_kcoef * g_sys_ctrl_param.vsp_voltage_end,446,431
+ebm_speed_max,差异待确认,g_ebm_Py2 | g_ebm_Py1,,"449,454",
+ebm_speed_min,差异待确认,g_ebm_Py1 | g_ebm_Py2,,"450,455",
+duty_start_relay,差异待确认,1000*0.8,g_sys_ctrl_param.duty_start * 0.8,459,432
+control_mA_start_relay,差异待确认,5.6*0.8,,463,
+drag_id_rate,差异待确认,g_sys_ctrl_param.drag_id_cmd/(0.02f/g_sys_ctrl_param.Tspeedloop),g_sys_ctrl_param.drag_id_cmd/(0.2f/g_sys_ctrl_param.Tspeedloop),475,445
+drag_iq_rate,差异待确认,g_sys_ctrl_param.drag_iq_cmd/(0.02f/g_sys_ctrl_param.Tspeedloop),g_sys_ctrl_param.drag_iq_cmd/(0.2f/g_sys_ctrl_param.Tspeedloop),476,446
+is_max,差异待确认,g_sys_ctrl_param.is_run,,505,
+weaken_id_min,差异待确认,g_sys_ctrl_param.fw_id_lower_limit_coef * g_sys_ctrl_param.is_max,g_sys_ctrl_param.fw_id_lower_limit_coef * g_sys_ctrl_param.is_max_run,513,483
+inv_Lq_minus_Ld,差异待确认,(1/g_sys_ctrl_param.Lq_minus_Ld)*g_sys_ctrl_param.param4,1/g_sys_ctrl_param.Lq_minus_Ld,517,487
+mcu_brake_reverse_judge_cnt,差异待确认,(u32)(0.3333 / (g_sys_ctrl_param.brake_reverse_max_wr /60 * g_sys_ctrl_param.pole_pairs) / g_sys_ctrl_param.Tfoc) + 1,,556,
+mcu_brake_low_speed_judge_cnt,差异待确认,(u32)(0.3333 / (g_sys_ctrl_param.brake_low_speed_wr /60 * g_sys_ctrl_param.pole_pairs) / g_sys_ctrl_param.Tfoc),,557,
+vac_rms_max,差异待确认,g_sys_ctrl_param.vdc_max / 1.414,,560,
+vac_rms_max_recover,差异待确认,g_sys_ctrl_param.vdc_max_recover / 1.414,,561,
+vac_rms_min_recover,差异待确认,g_sys_ctrl_param.vdc_min_recover/1.414,,562,
+vac_rms_min,差异待确认,g_sys_ctrl_param.vdc_min/1.414,,563,
+vac_lower_voltage,差异待确认,g_sys_ctrl_param.vdc_lower_voltage/1.414,,564,
+vac_rms_max_pfc_fault,差异待确认,g_sys_ctrl_param.vac_rms_max,,565,
+vac_rms_min_pfc_fault,差异待确认,g_sys_ctrl_param.vac_rms_min,,566,
+single_phase_lose_phase_cnt,允许调整保护时间,150000,,569,
+single_phase_lose_phase_cnt_pfc_fault,差异待确认,g_sys_ctrl_param.single_phase_lose_phase_cnt,,570,
+three_phase_lose_phase_cnt,差异待确认,g_sys_ctrl_param.single_phase_lose_phase_cnt,,571,
+over_current_max,差异待确认,g_sys_ctrl_param.is_run + (g_sys_ctrl_param.Hardware_over_i - g_sys_ctrl_param.is_run) * 0.45,g_sys_ctrl_param.Hardware_over_i - 20,574,530
+step_out_cnt,允许调整保护时间,5000,2500,579,535
+power_max_flt_set,差异待确认,g_sys_ctrl_param.power_max_set * 1.5 | g_sys_ctrl_param.power_max_set + 1000,g_sys_ctrl_param.fall_speed_power * 1.5 | g_sys_ctrl_param.fall_speed_power + 200 | g_sys_ctrl_param.fall_speed_power + 1000,"583,587","539,543,547"
+lose_phase_cnt,允许调整保护时间,2500,1500,590,550
+over_speed_cnt,允许调整保护时间,2500,5000,599,559
+linear_step_out_cnt,允许调整保护时间,5000,2500,601,561
+self_test_in_time_cnt,差异待确认,(u32)(g_sys_ctrl_param.self_test_in_time / g_sys_ctrl_param.Tmotorlogic),,613,
+self_test_out_time_cnt,差异待确认,(u32)(g_sys_ctrl_param.self_test_out_time / g_sys_ctrl_param.Tmotorlogic),,614,
+test7,差异待确认,g_sys_ctrl_param.param0,,622,
+duty_start_speed,差异待确认,,3000,,425
+duty_end_speed,差异待确认,,6000,,426
+duty_middle,差异待确认,,2000,,427
+duty_middle_relay,差异待确认,,g_sys_ctrl_param.duty_middle*0.9,,428
+duty_end_relay,差异待确认,,g_sys_ctrl_param.duty_end - 1,,433
+duty_kcoef,差异待确认,,(g_sys_ctrl_param.duty_end_speed - g_sys_ctrl_param.duty_start_speed)/(g_sys_ctrl_param.duty_end - g_sys_ctrl_param.duty_middle),,434
+duty_bias,差异待确认,,g_sys_ctrl_param.duty_end_speed - g_sys_ctrl_param.duty_kcoef * g_sys_ctrl_param.duty_end,,435
+is_limit_on,差异待确认,,g_sys_ctrl_param.is_max * 0.9,,479
+is_limit_off,差异待确认,,g_sys_ctrl_param.is_max * 0.8,,480
+observer_we_min,差异待确认,,g_sys_ctrl_param.mcu_observer_wr_min_rpm * g_sys_ctrl_param.rpm_to_radps_coef,,506

@@ -1,0 +1,26 @@
+原始含义,映射,文档约束,表达式或关联,test,示例值,param,模型,来源
+drag_success_judge_emfq,test0,,=0,test0,=0,,motor_logic,电机调试文档.xlsx/程序打包参数对照表!A2:I2
+pll_linear_switch,test1,固定不可变,2,test1,2,,motor_logic,电机调试文档.xlsx/程序打包参数对照表!A3:I3
+linear_alpha,test2,,8,test2,=D4,,foc,电机调试文档.xlsx/程序打包参数对照表!A4:I4
+linear_beta,test3,,10,test3,10,,foc,电机调试文档.xlsx/程序打包参数对照表!A5:I5
+mcu_linear_to_pll_wr,test4 param1,,test4=(param1-245)*0.4,test4,480,param1,,电机调试文档.xlsx/程序打包参数对照表!A6:I6
+startup_method_select,test5,固定不可变,2,test5,2,,foc,电机调试文档.xlsx/程序打包参数对照表!A7:I7
+startup_added_wr,test6 param3,,test6=(param3-205)*0.2,test6,50,param3,motor_mode,电机调试文档.xlsx/程序打包参数对照表!A8:I8
+startup_added_wr_bias,test7,固定不可变,2,test7,2,,motor_mode,电机调试文档.xlsx/程序打包参数对照表!A9:I9
+startup_added_wr_period_time,test8 param13,,test8=(param13-245)*0.5,test8,2.5,param13,,电机调试文档.xlsx/程序打包参数对照表!A10:I10
+mcu_pll_to_linear_wr,test9 param10,,test9=(param10-205)*0.5,test9,-110,param10,,电机调试文档.xlsx/程序打包参数对照表!A11:I11
+pll_to_linear_emfq,test10 param2,,test10=(param2-245)*0.4,test10,-100,param2,motor_logic,电机调试文档.xlsx/程序打包参数对照表!A12:I12
+mcu_pll_startup_pll_wn,test11 param6,,test11=(param6-245)*0.2,test11,5,param6,,电机调试文档.xlsx/程序打包参数对照表!A13:I13
+mcu_pll_startup_pll_zeta,test12 param8,,test12=(param8-255)*0.5,test12,0.5,param8,,电机调试文档.xlsx/程序打包参数对照表!A14:I14
+mcu_pll_wn,test13,,,test13,80,,,电机调试文档.xlsx/程序打包参数对照表!A15:I15
+mcu_pll_zeta,test14,,,test14,0.7,,,电机调试文档.xlsx/程序打包参数对照表!A16:I16
+mcu_brake_pll_wn,test15 param15,,test15=(param15-245)*0.4,test15,6,param15,,电机调试文档.xlsx/程序打包参数对照表!A17:I17
+mcu_brake_pll_zeta,test16 param5,,test16=(param5-225)*0.5,test16,0.5,param5,,电机调试文档.xlsx/程序打包参数对照表!A18:I18
+brake_we_LPF_wc,test17 param11,,test17=(param11-235)*0.4,test17,100,param11,foc,电机调试文档.xlsx/程序打包参数对照表!A19:I19
+linear_to_pll_threshold,test18,,关联test4,test18,,,motor_logic,电机调试文档.xlsx/程序打包参数对照表!A20:I20
+startup_added_wr_period_cnt,test19,,关联test8,test19,,,motor_mode,电机调试文档.xlsx/程序打包参数对照表!A21:I21
+pll_to_linear_threshold,test20,,关联test9,test20,,,motor_logic,电机调试文档.xlsx/程序打包参数对照表!A22:I22
+pll_startup_kp,test21,,关联test12 test11,test21,,,foc,电机调试文档.xlsx/程序打包参数对照表!A23:I23
+pll_startup_ki,test22,,关联test11,test22,,,foc,电机调试文档.xlsx/程序打包参数对照表!A24:I24
+brake_pll_kp,test23,,关联test 16 test15,test23,,,foc,电机调试文档.xlsx/程序打包参数对照表!A25:I25
+brake_pll_ki,test24,,关联test15,test24,,,foc,电机调试文档.xlsx/程序打包参数对照表!A26:I26

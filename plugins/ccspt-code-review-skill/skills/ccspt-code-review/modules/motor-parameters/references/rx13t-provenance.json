@@ -1,0 +1,15 @@
+{
+  "files": [
+    {
+      "path": "matlab_variable.c",
+      "sha256": "f2b6a0e33141581ada0480c4b86ae42228530e61fc9e71b61b6df740977ffaec"
+    },
+    {
+      "path": "matlab_variable2.c",
+      "sha256": "4b679b0dcc8ba09df044c7a54604f911f1ca78e616409b2dc7b7067caa56163e"
+    }
+  ],
+  "scope": "matlab_calc_param_init的有效直接赋值，保留同名赋值顺序；忽略空白，不做代数等价合并。不包含函数外初始化值、注释、条件控制流及完整执行顺序的等价证明。共同派生公式不冻结项目输入。时间例外单列。",
+  "common": 88,
+  "differences_and_exceptions": 43
+}

@@ -1,36 +1,20 @@
 # CCSpt Code Review Skill
 
-A cross-harness, versioned code-review workflow for Codex, Claude Code, and DeepSeek Harness.
+版本 **0.2.0**：一个审核入口，多个按需加载模块。当前包含电机参数模块，不包含空模块或旧字符串复制演示规则。
 
-Current version: **0.1.2**
+- 保留使用前GitHub版本检查：有新版询问是否更新；检测不可用记录状态并继续，不静默安装。
+- 参数模块：项目输入、规则/字典、间接解码、RX13T共同计算及保护关联。
+- 单文件HTML：按优先级排序、搜索筛选、点击展开；范围冲突合并表格。
 
-## What this version proves
+入口：`plugins/ccspt-code-review-skill/skills/ccspt-code-review/SKILL.md`。
+模块：入口目录的 `modules/motor-parameters/MODULE.md`。
 
-- One canonical `SKILL.md` is shared by multiple agent harnesses.
-- Every review checks for a newer Skill version before reading the review target.
-- When an update exists, processing pauses until the user chooses to update or continue.
-- Every report records the skill version and update status.
-- The demo rule `CR-DEMO-001` detects unbounded C string copies such as `strcpy`.
-- Engineer feedback is generated locally and is never uploaded or emailed without explicit approval.
+安装仍使用现有Codex/Claude插件marketplace；直接安装时只安装 `ccspt-code-review`，不另装模块。
 
-## Repository layout
+调用：使用 `$ccspt-code-review` 审核指定项目的 `matlab_variable.c`。正式审核先提供立项单及必要电机/硬件资料。
 
-- `plugins/ccspt-code-review-skill/`: portable plugin and shared skill.
-- `.agents/plugins/marketplace.json`: Codex repository marketplace.
-- `.claude-plugin/marketplace.json`: Claude Code marketplace.
-- `tests/demo-case/`: reproducible demonstration fixture.
+计算：`python modules/motor-parameters/scripts/calculate.py <参数文件> --output <计算结果.json>`，仅计算准备，不代表正式审核。
+报告：`python scripts/render_report.py <报告.json> --output <报告.html>`。
+验证：在仓库根运行 `python -m unittest discover -s tests -p "test_*.py"`；模块计算测试可单独运行其 `test_calculate.py`。
 
-## First test
-
-Ask the agent to use **ccspt-code-review** to review `tests/demo-case/demo.c`.
-The result should identify `CR-DEMO-001` and show the installed skill version.
-
-## Update gate
-
-Before opening or analyzing the requested code, the Skill checks GitHub for the latest version. When the installed version is older, it shows the current and latest versions and waits for the user to choose whether to update. It never updates automatically. If the user postpones the update, the review continues with the installed version.
-
-## Private-repository update checks
-
-An authenticated GitHub connector is preferred. Command-line users can use an authenticated `gh` CLI or provide `GH_TOKEN`/`GITHUB_TOKEN` through their existing secret-management setup. The checker never prints the token. If no authenticated route is available, update status is reported as unavailable and the review continues.
-
-This repository is private. Do not upload company source code, diffs, logs, credentials, or customer information as feedback.
+不会自动上传公司代码、资料或反馈。参数字典和基准只作为审核参考，不代表所有项目相同配置。更新按实际反馈迭代。
