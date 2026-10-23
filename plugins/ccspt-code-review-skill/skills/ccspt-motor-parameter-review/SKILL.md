@@ -1,13 +1,13 @@
 ---
-name: ccspt-code-review
-description: 按需路由CCSpt软件审核模块，审核电机控制参数及派生计算，结合项目资料输出按优先级排序、可展开的HTML报告；也用于维护审核规则。
+name: ccspt-motor-parameter-review
+description: 审核CCSpt电机控制参数及派生计算，结合项目资料输出按优先级排序、可展开的HTML报告；也用于维护审核规则。
 license: UNLICENSED
 compatibility: Requires repository read access. Network access is optional and used only to check for a newer skill version.
 ---
 
-# CCSpt 软件审核
+# CCSpt 电机参数审核
 
-一个统一入口，按审核目标加载模块。当前已实现电机参数审核，其他代码功能不宣称已有专项规则。默认只读审核，不修改固件。
+审核电机控制参数、派生计算及相关保护设置，按需加载电机参数模块。通用代码审查和温控逻辑不属于本 skill 的专项范围。默认只读审核，不修改固件。
 
 ## Pre-review update gate
 
@@ -15,7 +15,7 @@ compatibility: Requires repository read access. Network access is optional and u
 Complete this gate before opening, reading, or analyzing any requested source file, diff, or review target.
 
 1. Read `VERSION` and record it as `skill_version`.
-2. Check the latest `plugins/ccspt-code-review-skill/skills/ccspt-code-review/VERSION` on the private GitHub repository. Prefer an authenticated GitHub connector when the harness provides one; otherwise run `scripts/check_version.py`.
+2. Check the latest `plugins/ccspt-code-review-skill/skills/ccspt-motor-parameter-review/VERSION` on the GitHub repository. Prefer an authenticated GitHub connector when the harness provides one; otherwise run `scripts/check_version.py`.
 3. If the installed version is current, continue directly to the review.
 4. If a newer version exists, stop before processing the review target and tell the user both versions: `发现新版本：当前 <installed>，最新 <latest>。是否先更新？` Wait for the user's choice.
 5. If the user chooses to update, use the harness's supported Skill or plugin update mechanism, verify the installed version, and only then begin processing the review target. If updating fails or no updater is available, explain the problem and ask whether to continue with the installed version.

@@ -17,12 +17,12 @@ from urllib.request import Request, urlopen
 API_URL = (
     "https://api.github.com/repos/chenchenz1235/ccspt-code-review-skill/"
     "contents/plugins/ccspt-code-review-skill/skills/"
-    "ccspt-code-review/VERSION?ref=main"
+    "ccspt-motor-parameter-review/VERSION?ref=main"
 )
 RAW_URL = (
     "https://raw.githubusercontent.com/chenchenz1235/"
     "ccspt-code-review-skill/main/plugins/ccspt-code-review-skill/"
-    "skills/ccspt-code-review/VERSION"
+    "skills/ccspt-motor-parameter-review/VERSION"
 )
 VERSION_RE = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+(?:[-+][0-9A-Za-z.-]+)?$")
 
@@ -56,7 +56,7 @@ def fetch_with_gh(timeout: float) -> str:
             "--method",
             "GET",
             "repos/chenchenz1235/ccspt-code-review-skill/contents/"
-            "plugins/ccspt-code-review-skill/skills/ccspt-code-review/VERSION",
+            "plugins/ccspt-code-review-skill/skills/ccspt-motor-parameter-review/VERSION",
             "-f",
             "ref=main",
             "--jq",

@@ -1,6 +1,6 @@
 import importlib.util,unittest,re
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[1];SKILL=ROOT/'plugins/ccspt-code-review-skill/skills/ccspt-code-review'
+ROOT=Path(__file__).resolve().parents[1];SKILL=ROOT/'plugins/ccspt-code-review-skill/skills/ccspt-motor-parameter-review'
 def load(p):
     spec=importlib.util.spec_from_file_location(p.stem,p);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
 class ReleaseTests(unittest.TestCase):
