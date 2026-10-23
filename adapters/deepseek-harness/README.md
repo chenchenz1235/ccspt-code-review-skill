@@ -1,9 +1,11 @@
 # DeepSeek Harness adapter
 
-The canonical skill is:
+This directory contains manual integration notes only; no harness runtime or installation has been validated by this repository.
 
-`plugins/ccspt-code-review-skill/skills/ccspt-motor-parameter-review`
+Use the canonical directories under `plugins/ccspt-code-review-skill/skills/`:
 
-For the first proof of concept, configure that directory as a custom skill source or copy it into the project-level DeepSeek Harness skill directory. Keep the GitHub repository as the source of truth. Run `scripts/check_version.py` before review; update the clone only after explicit confirmation.
+- `ccspt-code-review`: toolkit entrypoint; requires the two sibling specialties.
+- `ccspt-motor-parameter-review`: motor parameter review, usable independently.
+- `ccspt-thermostat-logic`: thermostat documentation and review, usable independently.
 
-DeepSeek Harness is still in developer preview, so this adapter intentionally contains no harness-specific runtime code.
+Configure these as custom skill sources only if the target harness supports them. When copying, preserve the three sibling directories so entrypoint links resolve. Keep this repository as the source of truth; do not copy project source files into the skill package. Motor parameter review runs its own version check. Updating an installed skill requires the user's choice.

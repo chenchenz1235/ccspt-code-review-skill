@@ -1,0 +1,4 @@
+interface:
+  display_name: "CCSpt 电机参数审核"
+  short_description: "审核电机参数、派生计算及保护关联，依据项目资料生成离线报告"
+  default_prompt: "使用 $ccspt-motor-parameter-review 审核指定项目的电机参数及派生计算。"

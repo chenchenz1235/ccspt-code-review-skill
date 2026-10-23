@@ -7,8 +7,8 @@
     {
       "name": "ccspt-code-review-skill",
       "source": "./plugins/ccspt-code-review-skill",
-      "description": "CCSpt motor parameter review and thermostat logic documentation, conformance checks and implementation review.",
-      "version": "0.3.1",
+      "description": "CCSpt review toolkit: unified entrypoint, motor parameter review, and thermostat logic documentation and checks.",
+      "version": "0.4.0",
       "author": {
         "name": "CCSpt"
       }

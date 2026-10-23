@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ccspt-code-review-skill",
-  "version": "0.3.1",
-  "description": "CCSpt motor parameter review and thermostat logic documentation, conformance checks and implementation review.",
+  "version": "0.4.0",
+  "description": "CCSpt review toolkit: unified entrypoint, motor parameter review, and thermostat logic documentation and checks.",
   "author": {
     "name": "CCSpt"
   },

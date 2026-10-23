@@ -7,7 +7,7 @@ compatibility: Requires repository read access. Network access is optional and u
 
 # CCSpt 电机参数审核
 
-审核电机控制参数、派生计算及相关保护设置，按需加载电机参数模块。通用代码审查和温控逻辑不属于本 skill 的专项范围。默认只读审核，不修改固件。
+审核电机控制参数、派生计算及相关保护设置，按需加载电机参数审核流程。通用代码审查和温控逻辑不属于本 skill 的专项范围。默认只读审核，不修改固件。
 
 ## Pre-review update gate
 
@@ -23,17 +23,17 @@ Complete this gate before opening, reading, or analyzing any requested source fi
 7. Never install an update without the user's choice. If the update check is unavailable, do not block the review; record the unavailable status and continue.
 
 
-## 范围与路由
+## 范围与依据
 
 先确认目标文件、工程版本、用户约束和已有证据。执行上述更新检测后再读取审核目标。
 
 | 用户任务 | 按需加载 |
 |---|---|
-| matlab_variable.c、motor参数、派生计算、硬件系数、周期及参数字典 | [电机参数模块](modules/motor-parameters/MODULE.md) |
-| 更新规则或复核反馈 | 加载对应模块及[报告规范](references/report-policy.md) |
+| matlab_variable.c、motor参数、派生计算、硬件系数、周期及参数字典 | [电机参数审核流程](references/review-workflow.md) |
+| 更新规则或复核反馈 | 加载审核流程及[报告规范](references/report-policy.md) |
 | 尚无模块的代码功能 | 明确专项规则尚未建立，依据用户提供的规则处理，不套用已移除的演示规则 |
 
-立项单、电机/硬件资料和缺失信息处理由所用模块定义；项目公共信息共用，不能从文件名推断电压/功率等级。模块交叉引用同一问题时去重。
+立项单、电机/硬件资料和缺失信息处理由审核流程定义；项目公共信息共用，不能从文件名推断电压/功率等级。同一问题的交叉证据合并呈现。
 
 ## 统一输出
 
@@ -45,6 +45,6 @@ Complete this gate before opening, reading, or analyzing any requested source fi
 
 ## 规则维护
 
-用户确认覆盖旧规则。新增例外注明项目与适用条件，不能推广为所有项目都通过。项目资料留在用户工程，模块不包含示例工程源代码、原理图或客户立项资料。
+用户确认覆盖旧规则。新增例外注明项目与适用条件，不能推广为所有项目都通过。项目资料留在用户工程，本 skill 不包含示例工程源代码、原理图或客户立项资料。
 
-如请求反馈，按[反馈格式](references/feedback-schema.md)生成本地脱敏包；不自动上传。维护总入口、模块、脚本和版本后，运行离线测试，再发布。
+如请求反馈，按[反馈格式](references/feedback-schema.md)生成本地脱敏包；不自动上传。维护本 skill 的入口、流程、脚本和版本后，运行离线测试，再发布。

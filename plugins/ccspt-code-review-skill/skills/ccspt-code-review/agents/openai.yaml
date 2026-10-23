@@ -1,0 +1,4 @@
+interface:
+  display_name: "CCSpt 审核入口"
+  short_description: "按工程目标选择电机参数或温控逻辑专项，汇总检查范围和结果"
+  default_prompt: "使用 $ccspt-code-review 审核指定 CCSpt 工程，按我的目标选择专项并说明检查范围。"
